@@ -9,6 +9,12 @@ router.get('/books',function(req,res,next){
     }).catch(next);
 });
 
+router.get('/books/:id',function(req,res,next){
+    Book.findOne({}).then(function(books){
+        res.send(books);
+    }).catch(next);
+});
+
 // add a new book to database
 router.post('/books',function(req,res,next){
     Book.create(req.body).then(function(book){
@@ -29,7 +35,7 @@ router.put('/books/:id',function(req,res,next){
 router.delete('/books/:id',function(req,res,next){
     Book.findOneAndDelete({_id: req.params.id}).then(function(book){
         res.send(book);
-    });
+    }).catch(next);
 });
 
 module.exports = router;
